@@ -1,0 +1,12 @@
+*, *::before, *::after {
+    box-sizing: border-box;
+    font-family: 'Courier New', Courier, monospace;
+}
+
+
+#search-btn {
+    padding: 20px;
+    min-width: 10px;
+    max-height: 10px;
+    
+}

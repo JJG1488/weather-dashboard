@@ -1,16 +1,185 @@
 <!DOCTYPE html>
+
 <html lang="en">
+
 <head>
+
     <meta charset="UTF-8">
+
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
     <title>Document</title>
+
     <link rel="stylesheets" href="./styles/style.css">
-    <script src="https://code.jquery.com/jquery-3.5.1.min.js" integrity="sha256-9/aliU8dGd2tb6OSsuzixeV4y/faTqgFtohetphbbj0=" crossorigin="anonymous"></script>
+
+    <script src="https://code.jquery.com/jquery-3.5.1.min.js"
+        integrity="sha256-9/aliU8dGd2tb6OSsuzixeV4y/faTqgFtohetphbbj0=" crossorigin="anonymous"></script>
+
 </head>
-<body>
+
+<!-- ----------------------------------------------------------------------------------------------- -->
+<!-- -----------------------------------------TASK LIST------------------------------------------------------ -->
+<!-- ----------------------------------------------------------------------------------------------- -->
+
+<!-- after search, the city name/ the date/ an icon of weather condition/ the temperature/ the humidity/ the wind speed/ the UV index-->
+<!-- CURRENTLY HERE -->
+<!-- app needs to display form inputs -->
+<!-- display both current and future conditions for city then add the city to the search history -->
+<!-- the UV index needs the present a color that represents if the weather condition is favorable, moderate, or severe -->
+<!-- When the future weather conditions for that city is viewed, user should be presented with a 5 day forecast that displays the date, an icon representation of weather conditions, the temperature, and the humidity -->
+<!-- When city in search history is clicked, current and future conditions for that city is displayed-->
+<!-- When weather app is opened, the last searched city should show -->
+<!-- convert temp into fahrenheit -->
+<!-- create "cards" or some templat for diplaying data to the html -->
+<!-- store search data -->
+<!-- create modals instead of alerts-->
+
+
+<body> 
+
+    <!-- api key   "api.openweathermap.org/data/2.5/weather?q=" + $(“#userInput”).val() + "&APPID=b8e7f131d4a9ab46637431ee099c233a" -->
+
+    <div>
+        <p id="city-name"></p>
+        <p id="date"></p>
+        <p id="weather-icon"></p>
+        <p id="current-temperature"></p>
+        <p id="current-humidity"></p>
+        <p id="wind-speed"></p>
+        <p id="uv-index"></p>
+    </div>
+
+    <button type="submit" id="search-btn">Search for a City:</button>
+
+    <input id="userInput" placeholder="Enter City Here">
+
     <script>
 
+        // -----------------------------------------------------------------------------
+        // --------------------------------GET USER LOCATION----------------------------
+
+        // adds an event listener to the window and starts a function on the load of the window
+        window.addEventListener("load", () => {
+            // sets lon variable
+            let long;
+            // set lat variable
+            let lat;
+            // conditional for if navigator.geolocation is true
+            if (navigator.geolocation) {
+                // sets a function to be run for navigator.geolocation.getCurrentPosition
+                navigator.geolocation.getCurrentPosition(position => {
+                    // logs current position
+                    console.log(position);
+
+                });
+
+            };
+
+        });
+
+        // -----------------------------------------------------------------------------
+        // ------------------------------GLOBAL VARIABLES-------------------------------
+
+        // selects the search-btn id from the button in the html
+        let searchBtn = $("#search-btn");
+        // selects the userInput id from html
+        let userInput = $("#userInput");
+
+        // ------------------------------------------------------------------------------
+        // ------------------------------USER INPUT/ SEARCH BUTTON-----------------------
+
+        searchBtn.on("click", function () {
+            // sets the api url along with the apikey to the variable queryURL
+            let queryURL = "https://api.openweathermap.org/data/2.5/forecast?q=" + userInput.val().trim() + "&appid=b8e7f131d4a9ab46637431ee099c233a"
+            // let queryURL = "https://api.openweathermap.org/data/2.5/weather?q=" + userInput.val().trim() + ",us&appid=b8e7f131d4a9ab46637431ee099c233a";
+
+            $.ajax({
+
+                url: queryURL,
+
+                type: "GET"
+
+            }).then(function (response) {
+                let lon = response.city.coord["lon"];
+                let lat = response.city.coord["lat"];
+
+                // console.log(lon)
+                // console.log(lat)
+
+
+                let uvQueryURL = "http://api.openweathermap.org/data/2.5/uvi?lat=" + lat + "&lon=" + lon + "&appid=b8e7f131d4a9ab46637431ee099c233a";
+
+                $.ajax({
+
+                    url: uvQueryURL,
+
+                    type: "GET"
+
+                }).then(function (uvresponse) {
+
+                    // console.log(uvresponse);
+
+                    document.getElementById('uv-index').textContent = uvresponse["value"];
+
+                })
+
+
+                // logs the original returned object
+                console.log(response);
+                // stores the city name in a variable
+                // var city = response.city;
+                // logs city name to the console
+                // console.log(response.city.name);
+                // sets the city name to the id city-name
+                document.getElementById("city-name").textContent = response.city.name;
+                // logs the date to the console
+                // console.log(response.list[0].dt_txt)
+                // sets the date to the id date
+                document.getElementById("date").textContent = response.list[0].dt_txt;
+                // logs the icon to the console
+                // console.log(response.list[0].weather[0].icon)
+                // sets the weather icon to the id weather-icon
+                document.getElementById("weather-icon").textContent = "weather icon: " + response.list[0].weather[0].icon;
+                // logs the current temperature to the console
+                // console.log(response.list[0].main["temp"]);
+                // sets the current temperature to the id current temperature
+                document.getElementById("current-temperature").textContent = response.list[0].main["temp"];
+                // logs the wind speed to the console
+                // console.log(response.list[0].wind["speed"]);
+                // sets the wind speed to the id wind-speed
+                document.getElementById("wind-speed").textContent = response.list[0].wind["speed"];
+
+
+
+
+            });
+
+            // this alert helps to see if the function was working
+            // console.log(alert("button clicked"));
+
+        })
+
     </script>
+
     <!-- <script src="scripts/script.js"></script> -->
+
 </body>
+
 </html>
+
+<!-- // -----------------------------------------------------------------------------
+// --------------------------------Other Ajax code--------------------------------------------- -->
+
+<!-- // adds the city to the html
+var newNameValuesArray = document.getElementById("temp-card").textContent = city;
+// logs city name to the console
+console.log("city name: " + response.name);
+// stringify response.weather because it returned [object Object].... now its properties can be accessed
+console.log("weather: " + response.weather[0]["main"]);
+console.log(typeof response)
+// logs the humidity to the console
+console.log("humidity: " + response.main['humidity']);
+// logs the temp to the console
+console.log("temp: " + response.main['temp']);
+// logs the humidity to the console
+console.log(response.main['humidity']); -->
