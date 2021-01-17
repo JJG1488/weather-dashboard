@@ -1,12 +1,147 @@
-*, *::before, *::after {
+/* *, *::before, *::after {
     box-sizing: border-box;
     font-family: 'Courier New', Courier, monospace;
+} */
+
+body {
+    background-image: linear-gradient(120deg,#c2ccc0,#2552c3);
+}
+
+.grid-container {
+    display: grid;
+    grid-template-areas:
+      'header header header header header header'
+      'menu main main main right right'
+      'menu footer footer footer footer footer';
+    grid-gap: 5px;
+    /* background-color: #2196F3; */
+    padding: 5px;
+    max-width: 80%;
+    /* height: fit-content; */
+  }
+
+.item1 { grid-area: header; }
+.item2 { grid-area: menu; }
+.item3 { 
+    grid-area: main;
+    /* max-height: 200px; */
+ }
+.item4 {
+     grid-area: right; 
+     grid-auto-flow: row;
+    }
+.item5 { grid-area: footer; }
+
+.grid-container > div {
+    /* background-color: rgba(255, 255, 255, 0.8); */
+    text-align: center;
+    padding: 20px 0;
+    /* max-height: 300px; */
+    /* font-size: 30px; */
+  }
+
+.static{
+    position: static;
+}
+
+.weather-data {
+    position: static;
+    flex-wrap: wrap;
+    overflow: auto;
+    content: inherit;
+    background-color: lightblue;
+    width: 200px;
+    max-height: 800px;
+    padding: 25px;
+    border: 25px solid navy;
 }
 
 
-#search-btn {
+
+/* ------------------------------------------------------------------- */
+
+/* div.container-fluid {
+    background-color: brown;
+
+} */
+
+
+/* div.row {
+    background-color: chartreuse;
+
+} */
+
+/* div.col-6 {
+    background-color: lightgoldenrodyellow;
+
+} */
+
+.green {
+    background-color: green;
+}
+
+.red {
+    background-color: red;
+}
+
+.orange {
+    background-color: orange;
+}
+
+.yellow {
+    background-color: yellow;
+}
+
+/* MY BAG */
+.hide {
+    visibility: hidden;
+}
+
+.show {
+    visibility: visible;
+}
+
+
+
+/* The Modal (background) */
+.modal {
+    display: none; /* Hidden by default */
+    position: fixed; /* Stay in place */
+    z-index: 1; /* Sit on top */
+    left: 0;
+    top: 0;
+    width: 100%; /* Full width */
+    height: 100%; /* Full height */
+    overflow: auto; /* Enable scroll if needed */
+    background-color: rgb(0,0,0); /* Fallback color */
+    background-color: rgba(0,0,0,0.4); /* Black w/ opacity */
+  }
+  
+  /* Modal Content/Box */
+  .modal-content {
+    background-color: #fefefe;
+    margin: 15% auto; /* 15% from the top and centered */
     padding: 20px;
-    min-width: 10px;
-    max-height: 10px;
-    
-}
+    border: 1px solid #888;
+    width: 20%; /* Could be more or less, depending on screen size */
+  }
+  
+  /* The Close Button */
+  .close {
+    color: #aaa;
+    float: right;
+    font-size: 28px;
+    font-weight: bold;
+  }
+  
+  .close:hover,
+  .close:focus {
+    color: black;
+    text-decoration: none;
+    cursor: pointer;
+  }
+
+
+
+
+

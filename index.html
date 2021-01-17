@@ -7,72 +7,223 @@
     <meta charset="UTF-8">
 
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-giJF6kkoqNQ00vy+HMDP7azOuL0xtbfIcaT9wjKHr8RbDVddVHyTfAAsrekwKmP1" crossorigin="anonymous"> -->
+    <title>Weather Dashboard</title>
 
-    <title>Document</title>
+    <link rel="stylesheet" href="./styles/style.css">
 
-    <link rel="stylesheets" href="./styles/style.css">
 
     <script src="https://code.jquery.com/jquery-3.5.1.min.js"
         integrity="sha256-9/aliU8dGd2tb6OSsuzixeV4y/faTqgFtohetphbbj0=" crossorigin="anonymous"></script>
 
+
 </head>
 
-<!-- ----------------------------------------------------------------------------------------------- -->
-<!-- -----------------------------------------TASK LIST------------------------------------------------------ -->
-<!-- ----------------------------------------------------------------------------------------------- -->
+
+<!-- TASK LIST -->
+
 
 <!-- after search, the city name/ the date/ an icon of weather condition/ the temperature/ the humidity/ the wind speed/ the UV index-->
-<!-- CURRENTLY HERE -->
 <!-- app needs to display form inputs -->
 <!-- display both current and future conditions for city then add the city to the search history -->
-<!-- the UV index needs the present a color that represents if the weather condition is favorable, moderate, or severe -->
 <!-- When the future weather conditions for that city is viewed, user should be presented with a 5 day forecast that displays the date, an icon representation of weather conditions, the temperature, and the humidity -->
+<!-- convert temp into fahrenheit -->
+<!-- create "cards" or some template for diplaying data to the html -->
+<!-- store search data -->
+<!-- see if dates can be updated to be..... better -->
+<!-- the UV index needs the present a color that represents if the weather condition is favorable, moderate, or severe -->
+<!-- create modals instead of alerts-->
+<!-- change the header titles of the cards to reflect the date -->
+<!-- CURRENTLY HERE -->
+
 <!-- When city in search history is clicked, current and future conditions for that city is displayed-->
 <!-- When weather app is opened, the last searched city should show -->
-<!-- convert temp into fahrenheit -->
-<!-- create "cards" or some templat for diplaying data to the html -->
-<!-- store search data -->
-<!-- create modals instead of alerts-->
+
 
 
 <body> 
 
-    <!-- api key   "api.openweathermap.org/data/2.5/weather?q=" + $(“#userInput”).val() + "&APPID=b8e7f131d4a9ab46637431ee099c233a" -->
+    <!-- The Modal -->
+<div id="myModal" class="modal">
 
-    <div>
-        <p id="city-name"></p>
-        <p id="date"></p>
-        <p id="weather-icon"></p>
-        <p id="current-temperature"></p>
-        <p id="current-humidity"></p>
-        <p id="wind-speed"></p>
-        <p id="uv-index"></p>
+    <!-- Modal content -->
+    <div class="modal-content">
+      <span class="close">&times;</span>
+      <p>Please enter a city</p>
+    </div>
+  
+  </div>
+
+    <h1>Weather Forecast</h1>
+
+    <p>Plan your next trip and be prepared.</p>
+    <!-- ----------------------------------------------------------------------------------------------------------- -->
+    <!-- ----------------------------------------------------------------------------------------------------------- -->
+
+
+    <div class="grid-container">
+        <!-- ----------------------------------------------------------------------------------------------------------- -->
+        <!-- ----------------------------------------------------------------------------------------------------------- -->
+        <header>
+            <div class="item1">
+                <input type="search" id="userInput" placeholder="Enter City Here">
+                <button type="submit" id="search-btn">Search</button>
+            </div>
+        </header>
+
+        <!-- ----------------------------------------------------------------------------------------------------------- -->
+        <!-- ----------------------------------------------------------------------------------------------------------- -->
+        <div class="item2">Menu
+
+            <hr>
+
+            <ul id="search-history">
+
+            </ul>
+
+            <hr>
+
+        </div>
+
+        <!-- ----------------------------------------------------------------------------------------------------------- -->
+        <!-- ----------------------------------------------------------------------------------------------------------- -->
+        <div style="width: 60%" class="item3">
+
+                    <div class="weather-data">
+                        <p id="city-name"></p>
+                        <p id="date"></p>
+                        <p id="weather-icon"></p>
+                        <p id="current-temperature"></p>
+                        <p id="current-humidity"></p>
+                        <p id="wind-speed"></p>
+                        <p id="uv-index"></p>
+                        <hr>
+
+                    </div>
+            
+        </div>
+        </div>
+        <hr>
+        <!-- ----------------------------------------------------------------------------------------------------------- -->
+        <!-- ----------------------------------------------------------------------------------------------------------- -->
+        <!-- <div class="item4">
+
+            <div class="col">
+
+            </div> -->
+
+            <!-- ----------------------------------------------------------------------------------------------------------- -->
+            <!-- ----------------------------------------------------------------------------------------------------------- -->
+            <!-- <div class="item5">Footer</div>
+        </div> -->
+
+
+
+
+    <!-- ----------------------------------------------------------------------------------------------------------- -->
+    <!-- ----------------------------------------------------------------------------------------------------------- -->
+
+
+    <div class="container" style="display: flex; height: 30px;">
+
+        <div style="width: 20%;">
+
+                    <div class="weather-data">
+                        <p id="city-name2"></p>
+                        <p id="date2"></p>
+                        <p id="weather-icon2"></p>
+                        <p id="current-temperature2"></p>
+                        <p id="current-humidity2"></p>
+                        <p id="wind-speed2"></p>
+                        <p id="uv-index2"></p>
+                        <hr>
+                        <ul id="search-history2">
+                        </ul>
+
+                    </div>
+
+        </div>
+
+        <div style="width: 20%">
+
+                    <div class="weather-data">
+                        <p id="city-name3"></p>
+                        <p id="date3"></p>
+                        <p id="weather-icon3"></p>
+                        <p id="current-temperature3"></p>
+                        <p id="current-humidity3"></p>
+                        <p id="wind-speed3"></p>
+                        <p id="uv-index3"></p>
+                        <hr>
+                        <ul id="search-history3">
+                        </ul>
+
+                    </div>
+
+        </div>
+
+        <div style="width: 20%">
+
+                    <div class="weather-data">
+                        <p id="city-name4"></p>
+                        <p id="date4"></p>
+                        <p id="weather-icon4"></p>
+                        <p id="current-temperature4"></p>
+                        <p id="current-humidity4"></p>
+                        <p id="wind-speed4"></p>
+                        <p id="uv-index4"></p>
+                        <hr>
+                        <ul id="search-history4">
+                        </ul>
+
+                    </div>
+        </div>
+
+        <div style="width: 20%">
+
+                    <div class="weather-data">
+                        <p id="city-name5"></p>
+                        <p id="date5"></p>
+                        <p id="weather-icon5"></p>
+                        <p id="current-temperature5"></p>
+                        <p id="current-humidity5"></p>
+                        <p id="wind-speed5"></p>
+                        <p id="uv-index5"></p>
+                        <hr>
+                        <ul id="search-history5">
+                        </ul>
+
+                    </div>
+
+        </div>
+
+        <div style="width: 20%">
+
+                    <div class="weather-data">
+                        <p id="city-name6"></p>
+                        <p id="date6"></p>
+                        <p id="weather-icon6"></p>
+                        <p id="current-temperature6"></p>
+                        <p id="current-humidity6"></p>
+                        <p id="wind-speed6"></p>
+                        <p id="uv-index6"></p>
+                        <hr>
+                        <ul id="search-history6">
+                        </ul>
+
+                    </div>
+
+        </div>
+
     </div>
 
-    <button type="submit" id="search-btn">Search for a City:</button>
 
-    <input id="userInput" placeholder="Enter City Here">
 
     <script src="scripts/script.js"></script>
-
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-ygbV9kiqUc6oa4msXn9868pTtWMgiQaeYH7/t7LECLbyPA2x65Kgf80OJFdroafW"
+        crossorigin="anonymous"></script>
 </body>
 
 </html>
-
-<!-- // -----------------------------------------------------------------------------
-// --------------------------------Other Ajax code--------------------------------------------- -->
-
-<!-- // adds the city to the html
-var newNameValuesArray = document.getElementById("temp-card").textContent = city;
-// logs city name to the console
-console.log("city name: " + response.name);
-// stringify response.weather because it returned [object Object].... now its properties can be accessed
-console.log("weather: " + response.weather[0]["main"]);
-console.log(typeof response)
-// logs the humidity to the console
-console.log("humidity: " + response.main['humidity']);
-// logs the temp to the console
-console.log("temp: " + response.main['temp']);
-// logs the humidity to the console
-console.log(response.main['humidity']); -->
-
