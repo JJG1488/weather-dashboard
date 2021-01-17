@@ -21,19 +21,6 @@ window.addEventListener("load", () => {
 
     }
 
-    if(userInput.value === ""){
-
-        // alert("enter something");
-
-    } else {
-
-        alert("bad")
-        console.log(userInput.value)
-        console.log(typeof userInput)
-    }
-
-  
-
         });
 
 
@@ -114,11 +101,8 @@ searchBtn.addEventListener("click", function() {
         // append the li element to the element id search history
         document.getElementById('search-history').appendChild(li);
 
-        document.getElementById("btn").onclick = function(){
-
-    runSearch();
-
-
+        document.getElementById("btn").onclick = function(event){
+    runSearch(event);
 }
     
         localStorageStuff();
@@ -308,24 +292,41 @@ var span = document.getElementsByClassName("close")[0];
 
 // When the user clicks on the button, open the modal 
 
-
 searchBtn.onclick = function() {
 
     if(userInput.value === ""){
-  modal.style.display = "block";
-    }
+        modal.style.display = "block";
+        document.getElementById("search-btn").disabled = true;
+        searchHistory.pop(userInput.value)
+        
+
+
+} else {
+    document.getElementById("search-btn").disabled = false;
 
 }
 
 // When the user clicks on <span> (x), close the modal
 span.onclick = function() {
   modal.style.display = "none";
+  document.getElementById("search-btn").disabled = false;
+  searchHistory.pop(userInput.value)
+  document.getElementById('btn').remove();
+
 }
 
 // When the user clicks anywhere outside of the modal, close it
 window.onclick = function(event) {
+
   if (event.target == modal) {
+
     modal.style.display = "none";
+    document.getElementById("search-btn").disabled = false;
+    searchHistory.pop(userInput.value)
+    document.getElementById('btn').remove();
+
   }
+
 }
 
+}
