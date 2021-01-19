@@ -5,7 +5,7 @@
 ## Preview
 
 ![alt text](./assets/images/img.png)
-![Link]()
+![Link](url: <https://jjg1488.github.io/weather-dashboard/>)
 
 ## Description
 
